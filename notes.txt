@@ -1,0 +1,32 @@
+*Arrow functions in React:
+Before the advent of Reactv 16, arrow functions were not allowed and we had to use es5 functions that had to bind the this keyword to the function or method using the .bind method.
+
+Also react 16, we can eliminate the constructor object.
+constructor(props){
+    super(props);
+    this.state = {
+
+    }
+}
+
+Now, we can use arrow functions and need not use the bind method as it independently binds the this keyword.
+So wherever there is 'this' keyword, that means it still belongs to that class component.
+
+Fetch api: It a newer api method from javscript.
+But, we need to convert the incoming response data to a readable format json data.
+JSON data: it a readbale, light weight format of data that any programming language can understand and process it.
+
+In React, what are props?
+Props are like HTML attributes where the React component itself acts like a user defined HTML tag.
+
+What is e.preventDefault() in form?
+This methods prevents the default behavior of submitting and going to a new page. This prevents the whole page referesh or reload.
+Also, it signifies single page applications.
+
+What is state in React?
+State is a component that holds or keeps track of some info within a component. It gets updated accordingly due to changes to the variables that the state object is holding. This could be due to user interaction clicking a form or submitting or some other event listner.
+
+Explain async await and fetch.
+
+
+
