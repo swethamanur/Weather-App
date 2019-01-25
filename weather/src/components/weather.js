@@ -1,4 +1,5 @@
 import React ,{Component} from 'react';
+import '../App.css';
 
 class Weather extends Component{
 
@@ -19,10 +20,10 @@ class Weather extends Component{
     render() {
         return(
             <div style={this.displayStatus()} >
-                <h2>Weather forecast for {this.props.city},{this.props.country}</h2>
-                <p>Temperature : {this.props.temperature}</p>
-                <p>Humidity: {this.props.humidity}</p>
-                <p>Description: {this.props.description}</p>
+                <p className="weather__key">Weather forecast for <span className="weather__value"> {this.props.city},{this.props.country}</span></p>
+                <p className="weather__key">Temperature : <span className="weather__value"> {this.props.temperature}</span></p>
+                <p className="weather__key">Humidity: <span className="weather__value"> {this.props.humidity}</span></p>
+                <p className="weather__key">Description: <span className="weather__value"> {this.props.description}</span></p>
             </div>
         )
     } 

@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
+import '../App.css';
 
 const Header = () => {
     return (
         <header>
-            <h1>Weather App</h1>
-            <p>Find out the weather conditions in your desired location!!</p>
+            <h2 className="title-container__title">Weather App</h2>
+            <p className="title-container__subtitle">Find out the weather conditions in your desired location!!</p>
         </header>
     )
 };
-   
-
-    
 
 export default Header

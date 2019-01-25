@@ -49,13 +49,28 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
-        <Data getWeather={this.getWeather}/>
-        <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} />
-        <p>{this.state.error}</p>
+        <div className="wrapper">
+          <div className="main">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-5 title-container">
+                  <Header/>
+                </div>
+                <div className="col-md-7 form-container">
+                    <Data getWeather={this.getWeather}/>
+                    <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} />
+                    <p>{this.state.error}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
     );
   }
 }
+
+       
 
 export default App;
