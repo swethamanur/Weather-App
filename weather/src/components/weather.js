@@ -2,8 +2,7 @@ import React ,{Component} from 'react';
 import ReactAnimatedWeather from 'react-animated-weather';
 
 import '../App.css';
-import App from '../App';
-import Icon from '../components/icon';
+
 
 class Weather extends Component{
     state={
@@ -11,7 +10,6 @@ class Weather extends Component{
     }
     //display data only after reciving unput from user
     displayStatus (){
-       
         if(this.props.city && this.props.country){
             
             return {
@@ -26,7 +24,7 @@ class Weather extends Component{
 
     getIcon = () => {
         
-        console.log('onload')
+        this.setState({icon: ''});
         let weatherIcon = '';
         console.log('inside');
                 if(this.props.description === 'clear sky') {
@@ -47,7 +45,6 @@ class Weather extends Component{
                     weatherIcon = 'FOG'
                 }
                 this.setState({icon: weatherIcon});
-                console.log(this.state.icon)
         
         
     }

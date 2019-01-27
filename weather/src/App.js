@@ -4,7 +4,6 @@ import './App.css';
 import Header from './components/header';
 import Data from './components/data';
 import Weather from './components/weather';
-import Icon from './components/icon';
 
 class App extends Component {
   //state object
@@ -14,7 +13,8 @@ class App extends Component {
     country: undefined,
     humidity: undefined,
     description: undefined,
-    weatherError: undefined
+    weatherError: undefined,
+    src:''
   }
 
   //getWeather api call to open weather api
@@ -37,17 +37,21 @@ class App extends Component {
       let response = await apiCall.json();
 
     //updating the state component  
-    if(response.cod != '404'){
+    if(response.cod !== '404'){
       this.setState({
         temperature : response.main.temp,
         city: response.name,
         country: response.sys.country,
         humidity: response.main.humidity,
         description: response.weather[0].description,
-        weatherError: ''
+        weatherError: '',
+        src: ''
       });
-    }else if(response.cod === '404' && city && country){
-      this.setState({weatherError: 'Oops! This city is not found!'})
+    }else if(response.cod === '404' && city ){
+      this.setState({
+        weatherError: 'This city is not found!',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Oops_Stop_Sign_icon.svg/50px-Oops_Stop_Sign_icon.svg.png'
+      })
     };
     
 
@@ -67,7 +71,10 @@ class App extends Component {
                     <Data getWeather={this.getWeather}  />
                     <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} /><br/>
                     <br/>
-                    <p className="weather__value"><b>{this.state.weatherError}</b></p>
+                    <div  align="center">
+                        <img src={this.state.src} /><br/>
+                        <p className="weather__value"><b>{this.state.weatherError}</b></p>
+                    </div>
                 </div>
               </div>
             </div>
