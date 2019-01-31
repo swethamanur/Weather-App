@@ -116,7 +116,7 @@ button:active {
 
 .weather__value {
   color: #fff;
-  font-weight: 200;
+  font-weight: 150;
 }
 
 .weather__error {

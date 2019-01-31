@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/header';
 import Data from './components/data';
 import Weather from './components/weather';
+import HourUpdate from './components/hour';
 
 class App extends Component {
   //state object
@@ -23,6 +24,7 @@ class App extends Component {
     this.setState({
       temperature: '',
       city: '',
+      icon:'',
       country: '',
       humidity: '',
       description: '',
@@ -44,6 +46,7 @@ class App extends Component {
         country: response.sys.country,
         humidity: response.main.humidity,
         description: response.weather[0].description,
+        icon: `http://openweathermap.org/img/w/${response.weather[0].icon}.png`,
         weatherError: '',
         src: ''
       });
@@ -68,13 +71,27 @@ class App extends Component {
                   <Header/>
                 </div>
                 <div className="col-md-8 form-container">
-                    <Data getWeather={this.getWeather}  />
-                    <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} /><br/>
-                    <br/>
-                    <div  align="center">
-                        <img src={this.state.src} /><br/>
-                        <p className="weather__value"><b>{this.state.weatherError}</b></p>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <Data getWeather={this.getWeather}  />
+                    </div> 
+                    <div className="col-md-6"> 
+                      <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} icon={this.state.icon} /><br/>
+                      <br/>
+                      <div  align="center">
+                          <img src={this.state.src} /><br/>
+                          <p className="weather__value"><b>{this.state.weatherError}</b></p>
+                      </div>
                     </div>
+                    
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12" >  
+                      <HourUpdate city={this.state.city} country={this.state.country}/>
+                    </div>
+                  </div>
+                  
+                    
                 </div>
               </div>
             </div>

@@ -45,9 +45,18 @@ console.log(addressObject)
 
         //updating the state parameters
         this.setState({
-            city: address[0].long_name,
-            country: address[3].long_name
-        })
+            city: address[0].long_name});
+        if(address.length === 4){
+            this.setState({
+                country: address[3].long_name
+            });
+        }else(
+            this.setState({
+                country: address[2].long_name
+            })
+        )
+        
+        console.log(this.state.city,this.state.country);
     }
  
     //form submit event
@@ -57,8 +66,10 @@ console.log(addressObject)
         //passing these parameters to App.js
         if(!this.state.city ){
             this.setState({errorHandle : 'Please enter value!'})
-        }
+        };
+        console.log('submit',`${this.state.city},${this.state.country}`)
         this.props.getWeather(this.state.city,this.state.country);
+        
         
         //reseting the values in input
         this.setState({
@@ -74,7 +85,7 @@ console.log(addressObject)
                 <Script  url="https://maps.googleapis.com/maps/api/js?&key=AIzaSyBOIIADyCTwYHKJsjDlF_uTCXjYDc3IYRc&libraries=places"
                 onLoad={this.handleScriptLoad}/>
                 <form onSubmit={this.onSubmit} >
-                    <input id="autocomplete" type="text" placeholder="Enter place..." onChange={this.onChange} value={this.state.city}/>
+                    <input style={{fontSize: "20px" ,width:"200px"}} id="autocomplete" type="text" placeholder="Place..." onChange={this.onChange} value={this.state.city}/>
                     <p className="weather__value">{this.state.errorHandle}</p>
                     <button>Get Weather</button>
                 </form>
