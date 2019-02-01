@@ -7,7 +7,8 @@ class Data extends Component {
         city : '',
         country : '',
         icon: '',
-        errorHandle: ''
+        errorHandle: '',
+        zip: ''
     };
 
     //setting on Change to the sercah box
@@ -39,23 +40,32 @@ class Data extends Component {
     handleSelectPlace = () => {
         //getting the deatils of the place upon selecting usong the getPlace method
         let addressObject = this.autocomplete.getPlace();
-console.log(addressObject)
+        console.log(addressObject)
         //assigning the array or the list of predictions upon the event
         let address = addressObject.address_components;
+        
 
         //updating the state parameters
         this.setState({
             city: address[0].long_name});
-        if(address.length === 4){
+        if(address.length === 5){
+            this.setState({
+                country: address[3].long_name,
+                zip: address[4].long_name
+            });
+        }else if(address.length === 4){
             this.setState({
                 country: address[3].long_name
-            });
-        }else(
+            })
+        }else if(address.length === 3){
             this.setState({
                 country: address[2].long_name
             })
-        )
-        
+        }else if(address.length === 2){
+            this.setState({
+                country: address[1].long_name
+            })
+        }
         console.log(this.state.city,this.state.country);
     }
  
@@ -68,7 +78,7 @@ console.log(addressObject)
             this.setState({errorHandle : 'Please enter value!'})
         };
         console.log('submit',`${this.state.city},${this.state.country}`)
-        this.props.getWeather(this.state.city,this.state.country);
+        this.props.getWeather(this.state.city,this.state.country,this.state.zip);
         
         
         //reseting the values in input

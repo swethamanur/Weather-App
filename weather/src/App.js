@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
+import {ButtonGroup,Button,ButtonToolbar, ToggleButton} from 'react-bootstrap';
 
 import Header from './components/header';
 import Data from './components/data';
@@ -9,13 +11,65 @@ import HourUpdate from './components/hour';
 class App extends Component {
   //state object
   state = {
+    //for current weather update
     temperature: undefined,
     city: undefined,
     country: undefined,
     humidity: undefined,
     description: undefined,
     weatherError: undefined,
-    src:''
+    src:'',
+    tempSymbol: 'ºF',
+    
+    //for hourly update
+    hourlyTemperatures: [],
+    times: [],
+    dailyReport: [],
+    icons: []
+  };
+
+  //convert from F to C
+  getCelcius = () =>{
+    if(this.state.tempSymbol === 'ºF' ){
+      //rounding to one decimal place
+      //Current weather
+      this.setState({
+        temperature : Math.round(((this.state.temperature -32) *5/9)* 10) / 10,
+        tempSymbol : 'ºC'
+      });
+
+      //hourly weathers
+      this.state.hourlyTemperatures.forEach((hour,index) => {
+        
+        let celciusHour = Math.round(((hour- 32) * 5/9)*10)/10;
+        //pushing to the celcius array
+        this.state.hourlyTemperatures[index] = celciusHour;        
+      });
+      
+      
+    }
+    
+  };
+
+  //convert from C to F
+  getFarenheit = () =>{
+
+    if(this.state.tempSymbol === 'ºC'){
+      //rounding to one decimal place
+      this.setState({
+        temperature : Math.round(((this.state.temperature *9/5) + 32) * 10)/10,
+        tempSymbol : 'ºF'
+      })
+      //hourly weathers
+      this.state.hourlyTemperatures.forEach((hour,index) => {
+        
+        let farenheitHour = Math.round(((hour* 5/9) +32)*10)/10;
+        //pushing to the celcius array
+        this.state.hourlyTemperatures[index] = farenheitHour;        
+      });
+      
+    }
+    
   }
 
   //getWeather api call to open weather api
@@ -28,7 +82,12 @@ class App extends Component {
       country: '',
       humidity: '',
       description: '',
-      weatherError:''
+      weatherError:'',
+      hourlyTemperatures: [],
+      dailyReport: [],
+      tempSymbol: 'ºF',
+      tempUnits1: 'imperial',
+      tempUnits2: 'I'
       })
     const API_KEY = "1911e7806c7269695eba06270946fda2";
 
@@ -56,13 +115,49 @@ class App extends Component {
         src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Oops_Stop_Sign_icon.svg/50px-Oops_Stop_Sign_icon.svg.png'
       })
     };
+
+    //one more api call for hourly update
+      axios.get(`https://api.weatherbit.io/v2.0/forecast/hourly?city=${this.state.city},${this.state.country}&key=7d192036ace64638a6b7222064d44fe8&hours=6&units=I`).then((response) =>{
+         // console.log(response.data);
+
+          //error handling
+        if(response.cod !== 404 && city){
+          this.setState({dailyReport: [...this.state.dailyReport,response.data.data]});
+          //console.log(this.state.dailyReport[0]);
+
+          this.state.dailyReport[0].forEach((hour) => {
+              //converting the localstamp time to am/pm format time, temp and the icons for hourly updated weather
+              let time = (new Date(hour.timestamp_local).toLocaleString('en-US', { hour: 'numeric', hour12: true }));
+              this.setState({
+                times: [...this.state.times,time],
+                icons: [...this.state.icons,hour.weather.icon],
+                hourlyTemperatures: [...this.state.hourlyTemperatures,hour.temp]
+              })
+              
+              console.log('temperatures',this.state.hourlyTemperatures);
+              console.log('times',this.state.times)
+          });
+        }else{
+          this.setState({
+            weatherError: 'This city is not found!',
+            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Oops_Stop_Sign_icon.svg/50px-Oops_Stop_Sign_icon.svg.png'
+          })
+        }
+         
+          
+          
+      });
+
+     
+  }
     
 
 
-  }
+  
   render() {
     return (
       <div>
+
         <div className="wrapper">
           <div className="main">
             <div className="container">
@@ -76,7 +171,15 @@ class App extends Component {
                       <Data getWeather={this.getWeather}  />
                     </div> 
                     <div className="col-md-6"> 
-                      <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} icon={this.state.icon} /><br/>
+
+                      <div className="d-flex flex-column-md-1">
+                      <ButtonToolbar>
+                        <Button variant="primary" size="sm" onClick={this.getCelcius}> ºC </Button>
+                        <Button variant="primary" size="sm" onClick={this.getFarenheit}> ºF </Button>
+                      </ButtonToolbar>
+                      </div>
+
+                      <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} icon={this.state.icon} tempSymbol={this.state.tempSymbol} /><br/>
                       <br/>
                       <div  align="center">
                           <img src={this.state.src} /><br/>
@@ -87,7 +190,7 @@ class App extends Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12" >  
-                      <HourUpdate city={this.state.city} country={this.state.country}/>
+                      <HourUpdate hourlyTemperatures={this.state.hourlyTemperatures} tempSymbol={this.state.tempSymbol} times={this.state.times} icons={this.state.icons}/>
                     </div>
                   </div>
                   
