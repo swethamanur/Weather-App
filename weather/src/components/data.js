@@ -7,8 +7,7 @@ class Data extends Component {
         city : '',
         country : '',
         icon: '',
-        errorHandle: '',
-        zip: ''
+        errorHandle: ''
     };
 
     //setting on Change to the sercah box
@@ -48,10 +47,13 @@ class Data extends Component {
         //updating the state parameters
         this.setState({
             city: address[0].long_name});
-        if(address.length === 5){
+        if(address.length === 6){
             this.setState({
-                country: address[3].long_name,
-                zip: address[4].long_name
+                country: address[4].long_name
+            });
+        }else if (address.length === 5){
+            this.setState({
+                country: address[3].long_name
             });
         }else if(address.length === 4){
             this.setState({
