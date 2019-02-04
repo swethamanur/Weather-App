@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 //import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Script from 'react-load-script';
+import {Button,Glyphicon} from 'react-bootstrap';
 
 class Data extends Component {
     state = {
@@ -96,10 +97,14 @@ class Data extends Component {
             <div>
                 <Script  url="https://maps.googleapis.com/maps/api/js?&key=AIzaSyBOIIADyCTwYHKJsjDlF_uTCXjYDc3IYRc&libraries=places"
                 onLoad={this.handleScriptLoad}/>
-                <form onSubmit={this.onSubmit} >
-                    <input style={{fontSize: "20px" ,width:"200px"}} id="autocomplete" type="text" placeholder="Place..." onChange={this.onChange} value={this.state.city}/>
+                <form  >
+                    <input style={{fontSize: "20px" ,width:"200px"}} id="autocomplete" type="text" placeholder="Place..." onChange={this.onChange} value={this.state.city}/> 
+                    <Button onClick={this.onSubmit}>
+                            Get Weather
+                     </Button>
+                        
                     <p className="weather__value">{this.state.errorHandle}</p>
-                    <button>Get Weather</button>
+                    
                 </form>
             </div>
         )

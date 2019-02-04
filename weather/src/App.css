@@ -30,22 +30,26 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #000;
+  color:black;
 }
 
 .title-container__title {
-  font-size: 50px;
+  font-size: 30px;
   letter-spacing: 2px;
-  line-height: 1.3;
+  line-height: 0.3;
   font-family: 'Roboto Slab', serif;
+  height: 10vh;
+ 
 }
 
 .title-container__subtitle {
   font-style: italic;
   font-weight: 100;
+  font-size: 20px;
   letter-spacing: 1px;
-  line-height: 1.5;
+  line-height: 1;
   font-family: "Merriweather", serif;
+  height: 10vh;
 }
 
 .form-container {
@@ -108,6 +112,7 @@ button:active {
   border-bottom: solid 2px rgba(255,255,255,0.06);
   padding: 10px 0 10px 0;
   font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .weather__key:last-child {
@@ -116,7 +121,10 @@ button:active {
 
 .weather__value {
   color: #fff;
-  font-weight: 150;
+  font-weight: 120;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .weather__error {
@@ -124,4 +132,16 @@ button:active {
   font-size: 20px;
   letter-spacing: 1px;
   font-weight: 200;
+}
+
+.hour{
+  margin-top: 60px;
+  background-color: #2c3e50;
+  border-bottom: solid 2px rgba(255,255,255,0.06);
+
+}
+
+.today{
+  margin-bottom: 30px;
+
 }
