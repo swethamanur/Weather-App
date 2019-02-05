@@ -173,7 +173,8 @@ class App extends Component {
       sunset:'',
       cloudiness: '',
       wind: '',
-      visibility: ''
+      visibility: '',
+      controls: false
       })
     const API_KEY_1 = "1911e7806c7269695eba06270946fda2";
     const API_KEY_2 ='7d192036ace64638a6b7222064d44fe8';
@@ -274,7 +275,6 @@ class App extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="main">
             <div className="container">
               <div className="row" >
                 <div className="col-md-4 title-container">
@@ -282,16 +282,12 @@ class App extends Component {
                     <div className="col-md-12">
                       <Header/>
                     </div>
+                    <div className="col-md-12">
+                      <Data getWeather={this.getWeather}/>
+                    </div>
                    
                   </div>
                   
-                  <div className="row">
-                    <div className="col-md-12 weather__value">
-                      <Forecast days={this.state.days} minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} forecastIcons={this.state.forecastIcons}/>
-
-                    </div>
-
-                  </div>
                 </div>
                 <div className="col-md-8 form-container">
                   <div className="row">
@@ -303,20 +299,20 @@ class App extends Component {
                     <div className="col-md-6 " > 
                       
                       <div className="d-flex flex-column-md-1">
-                      <ButtonToolbar>
-                        <Button variant="primary" size="sm" onClick={this.getCelcius}> ºC </Button>
-                        <Button variant="primary" size="sm" onClick={this.getFarenheit}> ºF </Button>
-                      </ButtonToolbar>
+                        <ButtonToolbar>
+                          <Button variant="primary" size="sm" onClick={this.getCelcius}> ºC </Button>
+                          <Button variant="primary" size="sm" onClick={this.getFarenheit}> ºF </Button>
+                        </ButtonToolbar>
                       </div>
 
-                        <div>
-                          <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} icon={this.state.icon} tempSymbol={this.state.tempSymbol} /><br/>
-                          <br/>
-                            <div  align="center">
-                                <img src={this.state.src} /><br/>
-                                <p className="weather__value"><b>{this.state.weatherError}</b></p>
-                            </div>
-                        </div>
+                      <div>
+                        <Weather city={this.state.city} country={this.state.country} temperature={this.state.temperature} humidity={this.state.humidity} description={this.state.description} icon={this.state.icon} tempSymbol={this.state.tempSymbol} /><br/>
+                        <br/>
+                          <div  align="center">
+                              <img src={this.state.src} /><br/>
+                              <p className="weather__value"><b>{this.state.weatherError}</b></p>
+                          </div>
+                      </div>
                         
                     </div>
 
@@ -325,12 +321,12 @@ class App extends Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12 col-sm-12 today">
-                      <Today sunrise={this.state.sunrise} sunset={this.state.sunset} humidity={this.state.humidity} visibility={this.state.visibility} cloudiness={this.state.cloudiness} wind={this.state.wind}/>
+                      <Today sunrise={this.state.sunrise} sunset={this.state.sunset} humidity={this.state.humidity} visibility={this.state.visibility} cloudiness={this.state.cloudiness} wind={this.state.wind} />
                     </div>
                   </div>
                   <div className="row id" > 
                     <div className="col-md-12 col-sm-12"  >
-                      <Carousel activeIndex={this.state.index} direction={this.state.direction} onSelect={this.handleSelectCarousel} controls={this.state.controls} indicators={this.state.indicators} style={{margin: "auto",background:"black",alignItems: 'right',textJustify:'auto'}} >
+                      <Carousel activeIndex={this.state.index} direction={this.state.direction} onSelect={this.handleSelectCarousel} controls={this.state.controls} indicators={this.state.indicators}  >
                         <Carousel.Item  >
                           <HourUpdate hourlyTemperatures={this.state.hourlyTemperatures} tempSymbol={this.state.tempSymbol} times={this.state.times} icons={this.state.icons} start="0" end="4"/>
 
@@ -347,16 +343,11 @@ class App extends Component {
                     </div>
                   </div>
                   
-
-                  
-                  
-                  
-                    
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        
         
       </div>
     );

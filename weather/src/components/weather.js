@@ -28,8 +28,10 @@ class Weather extends Component{
                 <p className="weather__key">Weather forecast for <span className="weather__value"> {this.props.city},{this.props.country}</span></p>
 
                 <p align="center"  >
-                    <h2 className="weather__value" ><img src={this.props.icon}/><text className="weather__value text-capitalize">{this.props.description}</text>{` `} 
-                    {this.props.temperature}<b>{this.props.tempSymbol}</b></h2>
+                    <h2 className="weather__value" ><img src={this.props.icon}/><text className="weather__value text-capitalize">{this.props.description}{` `} 
+                    {this.props.temperature}<b>{this.props.tempSymbol}</b><br/>
+
+                    {this.props.maximumTemp}{this.props.tempSymbol}    {this.props.minimumTemp}{this.props.tempSymbol}  </text>  </h2>  
                     
                     
                 </p>
