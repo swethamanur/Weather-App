@@ -5,7 +5,7 @@ This app lets the user find out the current weather conditions and temperature f
 <ul>
 <li><b>ReactJS</b>: To create current weather, hourly weather and forecast components and hold the state values for each component. Also, to render result from OpenWeatherMap and WeatherBit API using fetch and axios methods.</li>
 <li><b>HTML<,/b> : To create a basic html template which renders the entire React ‘App’ component to the UI.</li>
-<li> <b>Bootstrap, React-Bootstrap, CSS </b>: To add styling to the layout, buttons, form, carousel component in the app.
+<li> <b>Bootstrap, React-Bootstrap, CSS </b>: To add styling to the layout, buttons, form, carousel component in the app.</b>
 </ul>
 
 # Dependencies 
