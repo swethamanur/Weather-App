@@ -31,7 +31,7 @@ class Weather extends Component{
                     <h2 className="weather__value" ><img src={this.props.icon}/><text className="weather__value text-capitalize">{this.props.description}{` `} 
                     {this.props.temperature}<b>{this.props.tempSymbol}</b><br/>
 
-                    {this.props.maximumTemp}{this.props.tempSymbol}    {this.props.minimumTemp}{this.props.tempSymbol}  </text>  </h2>  
+                    <img src="./images/high_temp.png"/>{this.props.maximumTemp}{this.props.tempSymbol}    {this.props.minimumTemp}{this.props.tempSymbol}  </text>  </h2>  
                     
                     
                 </p>
