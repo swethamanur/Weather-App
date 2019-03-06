@@ -41,8 +41,8 @@ App that finds out the current weather conditions and temperature for a city of 
 <table>  
   
 # API
-<h3> Open Weather Api</h3>: To get the current weather conditions of a city.
-<h3> Weather Bit API</h3>: To get the hourly weather conditions and the forecast for the next 10 days of a city.
+<h3> Open Weather Api</h3>To get the current weather conditions of a city.
+<h3> Weather Bit API</h3>To get the hourly weather conditions and the forecast for the next 10 days of a city.
 
 Get your API key to let the api authenticate yourself and use it in the app.
 
